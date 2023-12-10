@@ -34,7 +34,7 @@ defineProps<{
       <button type="button" class="btn" @click="usersStore.delete(user.id)">
         <img src="../assets/icons/trash.png" alt="Ícone de lixeira" title="Excluir cooperado" />
       </button>
-      <button type="button" class="btn">
+      <button type="button" class="btn" @click="$router.push(`/edit/${user.id}`)">
         <img src="../assets/icons/edit.png" alt="Ícone de lápis" title="Editar cooperado" />
       </button>
     </div>

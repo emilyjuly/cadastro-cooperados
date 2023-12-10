@@ -21,9 +21,10 @@ const router = createRouter({
       props: true
     },
     {
-      path: '/edit',
+      path: '/edit/:id',
       component: () => import('../layouts/MainLayout.vue'),
-      children: [{ path: '', component: () => import('../pages/EditPage.vue') }]
+      children: [{ path: '', component: () => import('../pages/EditPage.vue') }],
+      props: true
     },
     {
       path: '/users',

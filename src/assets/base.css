@@ -40,6 +40,11 @@ body {
   padding: 0;
 }
 
+input {
+  border: none;
+  padding: 5px;
+}
+
 input:focus {
   outline: none;
 }
