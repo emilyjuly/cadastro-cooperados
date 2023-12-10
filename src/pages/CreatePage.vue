@@ -5,15 +5,15 @@ import RegisterCard from '../components/RegisterCard.vue'
 <template>
   <div class="create-container">
     <div class="top">
-      <button type="button">
+      <button class="btn" type="button" @click="this.$router.push('/users')">
         <img
           class="icon"
           src="../assets/icons/arrow-left.png"
           alt="Seta para a esquerda"
           title="Voltar para a tela de visualização"
         />
+        <p class="back">Voltar</p>
       </button>
-      <p class="back">Voltar</p>
     </div>
     <div class="content">
       <RegisterCard />
@@ -39,6 +39,7 @@ button {
   background-color: transparent;
   padding: 10px;
   transition: 0.5s;
+  cursor: pointer;
 }
 
 button:hover {
@@ -50,6 +51,12 @@ button:hover {
   color: var(--color-text);
   width: 13px;
   height: 13px;
+}
+
+.btn {
+  display: flex;
+  align-items: center;
+  gap: 5px;
 }
 
 .back {

@@ -12,19 +12,31 @@ interface User {
 
 export const useUsersStore = defineStore('users', {
   state: () => ({
-    users: [] as User[]
+    users: [] as User[],
+    searchQuery: ''
   }),
   actions: {
     getAll() {
+      if (this.users.length === 0) {
+        const storedUsers = localStorage.getItem('users')
+        if (storedUsers) {
+          this.users = JSON.parse(storedUsers)
+        }
+      }
       return this.users
     },
 
     create(user: User) {
       this.users.push(user)
+      localStorage.setItem('users', JSON.stringify(this.users))
     },
 
     edit(id: number) {},
 
-    delete(id: number) {}
+    delete(id: number) {},
+
+    setSearchQuery(query: string) {
+      this.searchQuery = query
+    }
   }
 })

@@ -4,6 +4,8 @@ import { vMaska } from 'maska'
 import { useUsersStore } from '../stores/users'
 import { v4 as uuidv4 } from 'uuid'
 import Swal from 'sweetalert2'
+import VueDatePicker from '@vuepic/vue-datepicker'
+import '@vuepic/vue-datepicker/dist/main.css'
 
 const name = ref('')
 const phone = ref('')
@@ -11,7 +13,7 @@ const radioCheck = ref('')
 const cnpj = ref('')
 const cpf = ref('')
 const date = ref('')
-const budget = ref('')
+const budget = ref('R$')
 const errors = ref([])
 const router = ref(false)
 
@@ -27,12 +29,13 @@ const checkForm = async () => {
   if (radioCheck.value === 'pf') {
     checkRequiredField(cpf.value, 'O campo CPF é obrigatório')
     checkRequiredField(date.value, 'O campo Data de nascimento é obrigatório')
+    checkMaskCompleteness(cpf.value, 'O campo CPF está incompleto', 14)
   } else {
     checkRequiredField(cnpj.value, 'O campo CNPJ é obrigatório')
     checkRequiredField(date.value, 'O campo Data de constituição é obrigatório')
+    checkMaskCompleteness(cnpj.value, 'O campo CNPJ está incompleto', 18)
   }
   if (errors.value.length === 0) {
-    console.log('oi')
     const result = await Swal.fire({
       title: 'Deseja salvar esse cadastro?',
       showDenyButton: true,
@@ -69,6 +72,12 @@ const checkRequiredField = (value, errorMessage) => {
     errors.value.push(errorMessage)
   }
 }
+
+const checkMaskCompleteness = (value, errorMessage, length) => {
+  if (value.length < length) {
+    errors.value.push(errorMessage)
+  }
+}
 </script>
 
 <template>
@@ -80,10 +89,10 @@ const checkRequiredField = (value, errorMessage) => {
       class="input"
       type="text"
       name="phone"
-      placeholder="+00 (00) 0000-00000"
+      placeholder="+00 (00) 00000-0000"
       v-model="phone"
       v-maska
-      data-maska="['+## (##) ####-#####', '+## (##) ####-#####']"
+      data-maska="['+## (##) #####-####', '+## (##) #####-####']"
     />
     <p class="label">Perfil *</p>
     <div class="radios">
@@ -101,22 +110,14 @@ const checkRequiredField = (value, errorMessage) => {
       <input
         class="input"
         type="text"
-        name="phone"
+        name="cnpj"
         placeholder="00.000.000/0000-00"
         v-model="cnpj"
         v-maska
         data-maska="['##.###.###/####-##']"
       />
       <p class="label">Data da constituição *</p>
-      <input
-        class="input"
-        type="text"
-        name="date"
-        placeholder="dd/mm/aaaa"
-        v-model="date"
-        v-maska
-        data-maska="['##/##/####']"
-      />
+      <VueDatePicker v-model="date" :format="'dd/MM/yyyy'" />
       <p class="label">Faturamento</p>
       <input class="input" type="text" name="budget" placeholder="R$" v-model="budget" />
     </div>
@@ -132,15 +133,7 @@ const checkRequiredField = (value, errorMessage) => {
         data-maska="['###.###.###-##']"
       />
       <p class="label">Data de nascimento *</p>
-      <input
-        class="input"
-        type="text"
-        name="date"
-        placeholder="dd/mm/aaaa"
-        v-model="date"
-        v-maska
-        data-maska="['##/##/####']"
-      />
+      <VueDatePicker v-model="date" :format="'dd/MM/yyyy'" />
       <p class="label">Renda</p>
       <input class="input" type="text" name="budget" placeholder="R$" v-model="budget" />
     </div>
@@ -158,7 +151,7 @@ const checkRequiredField = (value, errorMessage) => {
       </div>
     </div>
   </div>
-  <div>{{ router ? this.$router.push('/users') : '' }}</div>
+  <div>{{ router ? this.$router.push('/details') : '' }}</div>
 </template>
 
 <style scoped>

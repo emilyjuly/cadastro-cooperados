@@ -1,11 +1,23 @@
 <script setup>
 import { useUsersStore } from '../stores/users'
 import UserCard from '../components/UserCard.vue'
+import { computed } from 'vue'
 
 const usersStore = useUsersStore()
 
+usersStore.getAll()
+
 const content = 'Cooperados'
 const quant = usersStore.users.length
+
+const filteredUsers = computed(() => {
+  const searchQuery = usersStore.searchQuery ? usersStore.searchQuery.toLowerCase() : ''
+  return usersStore.users.filter((user) => user.name.toLowerCase().includes(searchQuery))
+})
+
+const handleSearchInput = () => {
+  usersStore.setSearchQuery(usersStore.searchQuery)
+}
 </script>
 
 <template>
@@ -20,6 +32,8 @@ const quant = usersStore.users.length
             name="search"
             placeholder="Pesquise um nome"
             title="Pesquise um nome"
+            v-model="usersStore.searchQuery"
+            @input="handleSearchInput"
           />
           <img class="search-icon" src="../assets/icons/search.png" alt="Ícone de pesquisa" />
         </div>
@@ -41,11 +55,20 @@ const quant = usersStore.users.length
         </button>
       </div>
     </div>
-    <div class="content" v-if="usersStore.users.length > 0">
-      <div class="content" v-for="user in usersStore.users" :key="user.id">
+    <div class="content" v-if="filteredUsers.length > 0">
+      <div class="content" v-for="user in filteredUsers" :key="user.id">
         <UserCard :username="user.name" />
       </div>
     </div>
+    <div class="not-found-content" v-else-if="usersStore.users.length > 0">
+      <p class="not-found-text">Nenhum resultado encontrado para "{{ usersStore.searchQuery }}"</p>
+      <div class="content">
+        <div v-for="user in usersStore.users" :key="user.id">
+          <UserCard :username="user.name" />
+        </div>
+      </div>
+    </div>
+
     <div v-else class="not-found-container">
       <p class="not-found-text">Ainda não há cooperados cadastrados...</p>
       <img
@@ -122,20 +145,20 @@ const quant = usersStore.users.length
 .content {
   display: flex;
   padding: 20px;
+  gap: 20px;
 }
 
 .not-found-container {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  justify-content: left;
   width: 100%;
   height: 100vh;
 }
 
 .not-found-text {
-  font-size: 20px;
-  text-align: center;
+  font-size: 15px;
+  text-align: left;
   color: var(--color-text);
   font-weight: 500;
 }
@@ -168,5 +191,11 @@ button {
 button:hover {
   background-color: var(--medium-grey-color);
   transition: 0.5s;
+}
+
+.not-found-content {
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
 }
 </style>
