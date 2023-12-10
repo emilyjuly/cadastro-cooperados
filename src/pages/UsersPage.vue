@@ -57,14 +57,14 @@ const handleSearchInput = () => {
     </div>
     <div class="content" v-if="filteredUsers.length > 0">
       <div class="content" v-for="user in filteredUsers" :key="user.id">
-        <UserCard :username="user.name" />
+        <UserCard :user="user" />
       </div>
     </div>
     <div class="not-found-content" v-else-if="usersStore.users.length > 0">
       <p class="not-found-text">Nenhum resultado encontrado para "{{ usersStore.searchQuery }}"</p>
       <div class="content">
         <div v-for="user in usersStore.users" :key="user.id">
-          <UserCard :username="user.name" />
+          <UserCard :user="user" />
         </div>
       </div>
     </div>
@@ -146,6 +146,7 @@ const handleSearchInput = () => {
   display: flex;
   padding: 20px;
   gap: 20px;
+  flex-wrap: wrap;
 }
 
 .not-found-container {

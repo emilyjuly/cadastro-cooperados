@@ -1,6 +1,19 @@
 <script setup lang="ts">
+import { useUsersStore } from '../stores/users'
+
+const usersStore = useUsersStore()
+
+interface User {
+  id: string
+  name: string
+  register: string
+  profile: string
+  date: string
+  budget: string
+  phone: string
+}
 defineProps<{
-  username: string
+  user: User
 }>()
 </script>
 
@@ -8,16 +21,20 @@ defineProps<{
   <div class="card">
     <div class="avatar">
       <img
-        :src="`https://api.dicebear.com/7.x/initials/svg?seed=${username}&radius=50&backgroundType=gradientLinear`"
+        :src="`https://api.dicebear.com/7.x/initials/svg?seed=${user.name}&radius=50&backgroundType=gradientLinear`"
         alt="avatar"
       />
     </div>
-    <div class="username">{{ username }}</div>
+    <div class="username">
+      <button type="button" class="username-btn" @click="$router.push(`/details/${user.id}`)">
+        <span class="username-link">{{ user.name }}</span>
+      </button>
+    </div>
     <div class="options">
-      <button type="button">
+      <button type="button" class="btn" @click="usersStore.delete(user.id)">
         <img src="../assets/icons/trash.png" alt="Ícone de lixeira" title="Excluir cooperado" />
       </button>
-      <button type="button">
+      <button type="button" class="btn">
         <img src="../assets/icons/edit.png" alt="Ícone de lápis" title="Editar cooperado" />
       </button>
     </div>
@@ -54,7 +71,7 @@ defineProps<{
   justify-content: space-between;
 }
 
-button {
+.btn {
   border: none;
   background-color: transparent;
   cursor: pointer;
@@ -62,8 +79,26 @@ button {
   padding: 5px;
 }
 
-button:hover {
+.btn:hover {
   background-color: var(--secondary-background-color);
   transition: 0.5s;
+}
+
+.username-btn {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  transition: 0.5s;
+}
+
+.username-btn:hover {
+  border-bottom: 1px solid var(--accent-color);
+  transition: 0.5s;
+}
+
+.username-link {
+  font-size: 15px;
+  color: var(--color-text);
+  font-weight: 500;
 }
 </style>

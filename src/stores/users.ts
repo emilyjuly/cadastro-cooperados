@@ -1,7 +1,8 @@
 import { defineStore } from 'pinia'
+import Swal from 'sweetalert2'
 
 interface User {
-  id: number
+  id: string
   name: string
   register: string
   profile: string
@@ -26,17 +27,58 @@ export const useUsersStore = defineStore('users', {
       return this.users
     },
 
+    getOne(id: string) {
+      const user = this.users.find((user) => user.id === id)
+      return user
+    },
+
     create(user: User) {
       this.users.push(user)
       localStorage.setItem('users', JSON.stringify(this.users))
+      return user
     },
 
-    edit(id: number) {},
+    edit(updatedUser: User) {
+      const index = this.users.findIndex((user) => user.id === updatedUser.id)
+      if (index !== -1) {
+        this.users[index] = { ...this.users[index], ...updatedUser }
+        this.saveToLocalStorage()
+        return true
+      }
+      return false
+    },
 
-    delete(id: number) {},
+    async delete(id: string) {
+      const result = await Swal.fire({
+        title: 'Deseja excluir esse cooperado?',
+        showDenyButton: true,
+        confirmButtonText: 'Sim',
+        confirmButtonColor: '#00392a',
+        denyButtonText: `Não`,
+        color: '#00392a'
+      })
+
+      if (result.isConfirmed) {
+        const index = this.users.findIndex((user) => user.id === id)
+        if (index !== -1) {
+          this.users.splice(index, 1)
+          this.saveToLocalStorage()
+          return true
+        }
+        Swal.fire({ title: 'Feito!', confirmButtonColor: '#00392a' })
+      } else if (result.isDenied) {
+        Swal.fire({ title: 'O cooperado não foi excluído', confirmButtonColor: '#00392a' })
+      }
+
+      return false
+    },
 
     setSearchQuery(query: string) {
       this.searchQuery = query
+    },
+
+    saveToLocalStorage() {
+      localStorage.setItem('users', JSON.stringify(this.users))
     }
   }
 })

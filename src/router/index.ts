@@ -15,9 +15,10 @@ const router = createRouter({
       children: [{ path: '', component: () => import('../pages/CreatePage.vue') }]
     },
     {
-      path: '/details',
+      path: '/details/:id',
       component: () => import('../layouts/MainLayout.vue'),
-      children: [{ path: '', component: () => import('../pages/DetailsPage.vue') }]
+      children: [{ path: '', component: () => import('../pages/DetailsPage.vue') }],
+      props: true
     },
     {
       path: '/edit',

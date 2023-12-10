@@ -16,6 +16,8 @@ const date = ref('')
 const budget = ref('R$')
 const errors = ref([])
 const router = ref(false)
+const createdUser = ref({})
+const id = ref('')
 
 const usersStore = useUsersStore()
 
@@ -48,8 +50,8 @@ const checkForm = async () => {
     })
 
     if (result.isConfirmed) {
-      usersStore.create({
-        id: `#${uuidv4()}`,
+      createdUser.value = usersStore.create({
+        id: uuidv4(),
         name: name.value,
         register: cnpj.value ? cnpj.value : cpf.value,
         profile: radioCheck.value,
@@ -57,9 +59,11 @@ const checkForm = async () => {
         budget: budget.value,
         phone: phone.value
       })
+      console.log(createdUser.value)
       const ok = await Swal.fire({ title: 'Salvo!', icon: 'sucess', confirmButtonColor: '#00392a' })
       if (ok.isConfirmed) {
         router.value = true
+        id.value = createdUser.value.id
       }
     } else if (result.isDenied) {
       Swal.fire({ title: 'O cadastro não foi salvo', icon: 'info', confirmButtonColor: '#00392a' })
@@ -151,7 +155,9 @@ const checkMaskCompleteness = (value, errorMessage, length) => {
       </div>
     </div>
   </div>
-  <div>{{ router ? this.$router.push('/details') : '' }}</div>
+  <div>
+    {{ router ? this.$router.push(`/details/${id}`) : '' }}
+  </div>
 </template>
 
 <style scoped>
