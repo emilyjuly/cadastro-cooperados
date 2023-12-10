@@ -1,16 +1,16 @@
 <template class="bg-secondary">
-  <q-layout view="lHh Lpr lFf">
-    <q-header>
-      <q-toolbar>
-        <div class="toolbar">
-          <img class="logo" src="../assets/images/unicred-logo.png" alt="Logo da Unicred" /></div
-      ></q-toolbar>
-    </q-header>
+  <header>
+    <div class="toolbar">
+      <img
+        class="logo"
+        src="../assets/images/unicred-logo.png"
+        alt="Logo da Unicred"
+        @click="this.$router.push('/users')"
+      />
+    </div>
+  </header>
 
-    <q-page-container>
-      <router-view />
-    </q-page-container>
-  </q-layout>
+  <router-view />
 </template>
 
 <style scoped>
@@ -22,6 +22,7 @@
 }
 
 .logo {
+  cursor: pointer;
   width: 107px;
   height: 40px;
 }

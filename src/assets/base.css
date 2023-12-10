@@ -4,8 +4,10 @@
   --grey: #818181;
   --white: #ffffff;
   --green: #00392a;
+  --light-green: #027e5d;
   --light-gold: #cfba50;
-  --gold: #8c7d35;
+  --gold: #8c6635;
+  --red: #e44c4c;
 }
 
 :root {
@@ -17,6 +19,8 @@
   --light-color: var(--white);
   --gold-color: var(--gold);
   --light-gold-color: var(--light-gold);
+  --light-green-color: var(--light-green);
+  --alert-color: var(--red);
 }
 
 *,
