@@ -42,7 +42,7 @@ Plataforma destinada ao cadastro de cooperados da cooperativa de crédito Unicre
 - <a href="https://sweetalert2.github.io/" target="_blank">Swwet alert 2</a> (Alertas na aplicação)
 - <a href="https://www.npmjs.com/package/uuidv4" target="_blank">uuidv4</a> (Geração de ID dos usuários)
 - <a href="https://www.typescriptlang.org/" target="_blank">Typescript</a> (Tipagem dos dados)
-- <a href="https://www.dicebear.com/" target="_blank"> DiceBear</a> (Geração de avatares pela inicial dos usuário)
+- <a href="https://www.dicebear.com/" target="_blank"> DiceBear</a> (Geração de avatares pela inicial dos usuários)
 
 ### 🔊 Informações adicionais
 
