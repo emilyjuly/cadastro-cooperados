@@ -32,10 +32,23 @@ export const useUsersStore = defineStore('users', {
       return user
     },
 
+    checkExistence(register: string) {
+      const user = this.users.find((user) => user.register === register)
+      console.log(user)
+      if (user !== undefined) {
+        return true
+      }
+      return false
+    },
+
     create(user: User) {
-      this.users.push(user)
-      localStorage.setItem('users', JSON.stringify(this.users))
-      return user
+      const exists = this.checkExistence(user.register)
+      if (!exists) {
+        this.users.push(user)
+        localStorage.setItem('users', JSON.stringify(this.users))
+        return user
+      }
+      return false
     },
 
     edit(updatedUser: User) {

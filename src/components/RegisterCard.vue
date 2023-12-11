@@ -59,14 +59,20 @@ const checkForm = async () => {
         budget: budget.value,
         phone: phone.value
       })
-      console.log(createdUser.value)
-      const ok = await Swal.fire({ title: 'Salvo!', icon: 'sucess', confirmButtonColor: '#00392a' })
-      if (ok.isConfirmed) {
-        router.value = true
-        id.value = createdUser.value.id
+      if (!createdUser.value) {
+        await Swal.fire({
+          title: 'Esse CPF/CNPJ já está cadastrado',
+          confirmButtonColor: '#00392a'
+        })
+      } else {
+        const ok = await Swal.fire({ title: 'Salvo!', confirmButtonColor: '#00392a' })
+        if (ok.isConfirmed) {
+          router.value = true
+          id.value = createdUser.value.id
+        }
       }
     } else if (result.isDenied) {
-      Swal.fire({ title: 'O cadastro não foi salvo', icon: 'info', confirmButtonColor: '#00392a' })
+      Swal.fire({ title: 'O cadastro não foi salvo', confirmButtonColor: '#00392a' })
     }
   }
 }

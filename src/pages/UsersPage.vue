@@ -45,14 +45,6 @@ const handleSearchInput = () => {
             title="Adicione um cooperado"
           />
         </button>
-        <button type="button" v-if="usersStore.users.length > 0">
-          <img
-            class="icon-list"
-            src="../assets/icons/list.png"
-            alt="Ícone de lista que indica visualizar os usuários em forma de lista"
-            title="Mudar visualização para lista"
-          />
-        </button>
       </div>
     </div>
     <div class="content" v-if="filteredUsers.length > 0">
@@ -136,12 +128,6 @@ const handleSearchInput = () => {
   width: 18px;
   height: 18px;
 }
-
-.icon-list {
-  width: 15px;
-  height: 15px;
-}
-
 .content {
   display: flex;
   padding: 20px;
