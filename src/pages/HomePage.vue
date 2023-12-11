@@ -14,7 +14,7 @@ const linkText = 'https://www.unicred.com.br/'
         src="../assets/icons/people.png"
         alt="Ícone com 3 bonecos, indicando várias pessoas"
       />
-      <button class="btn" type="button" @click="this.$router.push('users')">
+      <button class="btn" type="button" @click="$router.push('users')">
         {{ buttonText }}
       </button>
       <p class="link">{{ linkText }}</p>
