@@ -5,7 +5,7 @@ import EditCard from '../components/EditCard.vue'
 <template>
   <div class="details-container">
     <div class="top">
-      <button class="btn" type="button" @click="this.$router.push('/users')">
+      <button class="btn" type="button" @click="$router.push('/users')">
         <img
           class="icon"
           src="../assets/icons/arrow-left.png"

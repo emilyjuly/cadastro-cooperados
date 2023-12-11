@@ -166,13 +166,13 @@ const checkRequiredField = (value, errorMessage) => {
       </div>
       <div class="btns">
         <button type="submit" @click="checkForm()">Salvar</button>
-        <button @click="this.$router.push(`/details/${usersStore.getOne($route.params.id).id}`)">
+        <button @click="$router.push(`/details/${usersStore.getOne($route.params.id).id}`)">
           Cancelar
         </button>
       </div>
     </div>
     <div>
-      {{ router ? this.$router.push(`/details/${usersStore.getOne($route.params.id).id}`) : '' }}
+      {{ router ? $router.push(`/details/${usersStore.getOne($route.params.id).id}`) : '' }}
     </div>
   </div>
 </template>

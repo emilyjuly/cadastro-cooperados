@@ -5,7 +5,7 @@
         class="logo"
         src="../assets/images/unicred-logo.png"
         alt="Logo da Unicred"
-        @click="this.$router.push('/users')"
+        @click="$router.push('/users')"
       />
     </div>
   </header>

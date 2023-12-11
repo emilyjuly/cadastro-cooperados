@@ -151,7 +151,7 @@ const checkMaskCompleteness = (value, errorMessage, length) => {
     <div class="options" v-if="radioCheck">
       <div>
         <button class="btn" type="submit" @click="checkForm()">Salvar</button>
-        <button class="btn" type="button" @click="this.$router.push('/users')">Cancelar</button>
+        <button class="btn" type="button" @click="$router.push('/users')">Cancelar</button>
       </div>
 
       <div v-if="errors.length > 0">
@@ -162,7 +162,7 @@ const checkMaskCompleteness = (value, errorMessage, length) => {
     </div>
   </div>
   <div>
-    {{ router ? this.$router.push(`/details/${id}`) : '' }}
+    {{ router ? $router.push(`/details/${id}`) : '' }}
   </div>
 </template>
 

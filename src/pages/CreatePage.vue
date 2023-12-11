@@ -5,7 +5,7 @@ import RegisterCard from '../components/RegisterCard.vue'
 <template>
   <div class="create-container">
     <div class="top">
-      <button class="btn" type="button" @click="this.$router.push('/users')">
+      <button class="btn" type="button" @click="$router.push('/users')">
         <img
           class="icon"
           src="../assets/icons/arrow-left.png"

@@ -37,7 +37,7 @@ const handleSearchInput = () => {
           />
           <img class="search-icon" src="../assets/icons/search.png" alt="Ícone de pesquisa" />
         </div>
-        <button type="button" @click="this.$router.push('create')">
+        <button type="button" @click="$router.push('create')">
           <img
             class="icon-add"
             src="../assets/icons/person-add.png"
@@ -72,7 +72,7 @@ const handleSearchInput = () => {
         type="button"
         class="create-user"
         title="Clique para cadastrar um cooperado"
-        @click="this.$router.push('create')"
+        @click="$router.push('create')"
       >
         Cadastrar
       </button>
