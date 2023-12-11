@@ -62,7 +62,7 @@ const handleSearchInput = () => {
     </div>
 
     <div v-else class="not-found-container">
-      <p class="not-found-text">Ainda não há cooperados cadastrados...</p>
+      <p class="not-found-text-2">Ainda não há cooperados cadastrados...</p>
       <img
         class="not-found-image"
         src="../assets/icons/404-error.png"
@@ -138,7 +138,7 @@ const handleSearchInput = () => {
 .not-found-container {
   display: flex;
   flex-direction: column;
-  justify-content: left;
+  align-items: center;
   width: 100%;
   height: 100vh;
 }
