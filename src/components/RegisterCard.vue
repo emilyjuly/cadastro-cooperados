@@ -18,6 +18,7 @@ const errors = ref([])
 const router = ref(false)
 const createdUser = ref({})
 const id = ref('')
+const show = ref(false)
 
 const usersStore = useUsersStore()
 
@@ -161,7 +162,7 @@ const checkMaskCompleteness = (value, errorMessage, length) => {
       </div>
     </div>
   </div>
-  <div>
+  <div v-show="show">
     {{ router ? $router.push(`/details/${id}`) : '' }}
   </div>
 </template>
